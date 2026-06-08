@@ -2,6 +2,7 @@ package org.example.pessoa;
 
 import org.example.animal.Animal;
 import org.example.atendimento.Atendimento;
+import org.example.atendimento.EmAtendimentoState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +20,14 @@ public class Tutor extends Pessoa implements Observer {
     public String getUltNotificacao() {
         return ultNotificacao;
     }
-    public void addInteresseVaga(Atendimento interesse){
-        interesse.addObserver(this);
+    public void addInteresseVaga(Atendimento interesse)
+    {
+        interesse.registrarObservador(EmAtendimentoState.getInstance(), this);
     }
     @Override
-    public void update(Observable vaga, Object arg) {
-        this.ultNotificacao = " vaga Alterada:"+ vaga.toString();
+    public void update(Observable vaga, Object arg)
+    {
+        this.ultNotificacao = "Atendimento Iniciado:"+ vaga.toString()+" Tutor:"+this.getNome();
     }
 
 }

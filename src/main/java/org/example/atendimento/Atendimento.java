@@ -5,7 +5,7 @@ import org.example.pessoa.Veterinario;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Observable;
+import java.util.*;
 
 public class Atendimento extends Observable implements IAtendimento {
 
@@ -15,21 +15,59 @@ public class Atendimento extends Observable implements IAtendimento {
     private Veterinario veterinario;
     private AtendimentoState estado;
 
+    private Map<AtendimentoState, List<Observer>> _observadoresPorEstado = new HashMap<>();
+
+    public void registrarObservador(AtendimentoState state, Observer user)
+    {
+        _observadoresPorEstado.putIfAbsent(state, new ArrayList<>());
+        if (!_observadoresPorEstado.get(state).contains(user))
+        {
+            _observadoresPorEstado.get(state).add(user);
+        }
+    }
+
     public Atendimento(){
         this.estado = AgendadoState.getInstance();
+        this.data = LocalDate.of(26,12,25);
+        this.horario = LocalTime.of(12,59,59);
     }
 
     public Boolean agendar(){
         return estado.agendadoState(this);
     }
-    public Boolean emAndamento(){
-        return estado.emAndamentoState(this);
+    public Boolean emAndamento()
+    {
+        Boolean transicaoSucesso = estado.emAndamentoState(this);
+        if (transicaoSucesso) {
+            notificar(this.estado);
+        }
+        return transicaoSucesso;
     }
-    public Boolean finalizar(){
-        return estado.finalizadoState(this);
+
+    private void notificar(AtendimentoState estadoAtual) {
+        List<Observer> interessados = _observadoresPorEstado.get(estadoAtual);
+
+        if (interessados != null) {
+            for (Observer observador : interessados) {
+                observador.update(this, null);
+            }
+        }
     }
-    public Boolean cancelar(){
-        return estado.canceladoState(this);
+    public Boolean finalizar()
+    {
+        Boolean transicaoSucesso = estado.finalizadoState(this);
+        if (transicaoSucesso) {
+            notificar(this.estado);
+        }
+        return transicaoSucesso;
+    }
+    public Boolean cancelar()
+    {
+        Boolean transicaoSucesso = estado.canceladoState(this);
+        if (transicaoSucesso) {
+            notificar(this.estado);
+        }
+        return transicaoSucesso;
     }
 
     public AtendimentoState getEstado() {
@@ -72,15 +110,16 @@ public class Atendimento extends Observable implements IAtendimento {
         setChanged();
         notifyObservers();
     }
+
+
+
     @Override
     public String toString() {
 
         return "Atendimento{" +
-                "data=" + data +
-                ", horario=" + horario +
-                ", tutor=" + tutor.getNome() +
-                ", veterinario=" + veterinario.getNome() +
-                ", estado=" + getEstado() +
+                "Data="+ this.data+
+                ", Hora=" +this.horario+
+                ", estado=" + estado.getState() +
                 '}';
     }
 
