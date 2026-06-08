@@ -9,7 +9,7 @@ public class PessoaFactory {
         return instance;
     }
 
-    public static IFactory obterPessoa(String pessoa){
+    public static Pessoa obterPessoa(String pessoa){
         Class classe = null;
         Object object = null;
 
@@ -19,10 +19,10 @@ public class PessoaFactory {
         } catch (Exception e) {
             throw new IllegalArgumentException("Pessoa inexistente");
         }
-        if (!(object instanceof IFactory)){
+        if (!(object instanceof Pessoa)){
             throw new IllegalArgumentException("Pessoa inválido");
         }
-        return (IFactory) object;
+        return (Pessoa) object;
     }
 
 }
