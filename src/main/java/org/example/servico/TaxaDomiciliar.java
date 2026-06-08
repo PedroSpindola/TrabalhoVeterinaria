@@ -5,11 +5,17 @@ import org.example.atendimento.IAtendimento;
 
 public class TaxaDomiciliar extends AtendimentoDecorator {
 
-    public TaxaDomiciliar(IAtendimento atendimento){
+    private float serviceModifier;
+
+    public TaxaDomiciliar(IAtendimento atendimento, float serviceModifier)
+    {
         super(atendimento);
+        this.serviceModifier = serviceModifier;
     }
+
     @Override
-    public float getPercentualAumentoServico() {
-        return 10.0f;
+    public float getPercentualModificadorServico()
+    {
+        return 1+(serviceModifier/100);
     }
 }

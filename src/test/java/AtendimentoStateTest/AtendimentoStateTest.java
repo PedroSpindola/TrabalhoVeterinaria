@@ -11,14 +11,14 @@ public class AtendimentoStateTest
 
     @Test
     public void deveAprovarATrocaDeAgendadoParaCancelado(){
-        atendimento = new Atendimento();
+        atendimento = new Atendimento(1000);
         assertTrue(atendimento.cancelar());
         assertEquals(CancelarState.getInstance(), atendimento.getEstado());
     }
 
     @Test
     public void naoDeveCancelarAtendimentoFinalizado(){
-        atendimento = new Atendimento();
+        atendimento = new Atendimento(1000);
         assertTrue(atendimento.emAndamento());
         assertTrue(atendimento.finalizar());
         atendimento.cancelar();

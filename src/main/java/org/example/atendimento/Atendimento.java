@@ -14,6 +14,7 @@ public class Atendimento extends Observable implements IAtendimento {
     private Tutor tutor;
     private Veterinario veterinario;
     private AtendimentoState estado;
+    private float valorBase;
 
     private Map<AtendimentoState, List<Observer>> _observadoresPorEstado = new HashMap<>();
 
@@ -26,10 +27,15 @@ public class Atendimento extends Observable implements IAtendimento {
         }
     }
 
-    public Atendimento(){
+    public Atendimento(float valorBase){
         this.estado = AgendadoState.getInstance();
         this.data = LocalDate.of(26,12,25);
         this.horario = LocalTime.of(12,59,59);
+        this.valorBase = valorBase;
+    }
+
+    public void setValorBase(float valorBase){
+        this.valorBase = valorBase;
     }
 
     public Boolean agendar(){
@@ -103,15 +109,14 @@ public class Atendimento extends Observable implements IAtendimento {
     }
 
     @Override
-    public float getValorServico() {
-        return 0;
+    public float getValorServico()
+    {
+        return valorBase;
     }
     public void avisarVaga() {
         setChanged();
         notifyObservers();
     }
-
-
 
     @Override
     public String toString() {

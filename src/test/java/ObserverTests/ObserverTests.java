@@ -14,7 +14,7 @@ public class ObserverTests
 
     @Test
     public void deveNotificarOTutorQuandoIniciaOAtendimento(){
-        Atendimento atendimento = new Atendimento();
+        Atendimento atendimento = new Atendimento(1000);
         Tutor tutor = new Tutor();
         tutor.setNome("Patrick");
         tutor.addInteresseVaga(atendimento);
@@ -24,7 +24,7 @@ public class ObserverTests
 
     @Test
     public void deveNotificarOVeterinarioQuandoCancelaOAtendimento(){
-        Atendimento atendimento = new Atendimento();
+        Atendimento atendimento = new Atendimento(1000);
         Veterinario veterinario = new Veterinario();
         Tutor tutor = new Tutor();
         veterinario.setNome("Jão");
@@ -36,7 +36,7 @@ public class ObserverTests
 
     @Test
     public void deveNotificarARecepcaoETutorQuandoIniciaEFinalizaOAtendimento(){
-        Atendimento atendimento = new Atendimento();
+        Atendimento atendimento = new Atendimento(1000);
         Tutor tutor = new Tutor();
         tutor.setNome("Patrick");
         Recepcao recepcao = new Recepcao();
@@ -50,7 +50,7 @@ public class ObserverTests
 
     @Test
     public void naoDeveNotificarOVeterinarioQuandoNaoFoiCanceladoOAtendimento(){
-        Atendimento atendimento = new Atendimento();
+        Atendimento atendimento = new Atendimento(1000);
         Veterinario veterinario = new Veterinario();
         veterinario.setNome("Jão");
         atendimento.emAndamento();

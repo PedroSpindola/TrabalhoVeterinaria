@@ -14,9 +14,9 @@ public abstract class AtendimentoDecorator implements IAtendimento {
         this.atendimento = atendimento;
     }
 
-    public abstract float getPercentualAumentoServico();
+    public abstract float getPercentualModificadorServico();
 
     public float getValorServico() {
-        return this.atendimento.getValorServico() *(1+this.getPercentualAumentoServico()/100);
+        return this.atendimento.getValorServico() *(this.getPercentualModificadorServico());
     }
 }
