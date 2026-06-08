@@ -10,12 +10,21 @@ public class AgendadoState extends AtendimentoState {
     }
 
     @Override
-    public boolean emAndamentoState(Atendimento atendimento) {
+    public String getState() {
+        return "scheduled";
+    }
+
+    @Override
+    public boolean emAndamentoState(Atendimento atendimento)
+    {
+        atendimento.setEstado(EmAtendimentoState.getInstance());
         return true;
     }
 
     @Override
-    public boolean canceladoState(Atendimento atendimento) {
+    public boolean canceladoState(Atendimento atendimento)
+    {
+        atendimento.setEstado(CancelarState.getInstance());
         return true;
     }
 }

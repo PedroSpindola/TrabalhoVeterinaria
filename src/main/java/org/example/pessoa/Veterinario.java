@@ -5,7 +5,7 @@ import org.example.atendimento.Atendimento;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Veterinario extends Pessoa implements Observer, IFactory {
+public class Veterinario extends Pessoa implements Observer {
 
     private String crmv;
     private String ultNotificacao;
@@ -24,8 +24,4 @@ public class Veterinario extends Pessoa implements Observer, IFactory {
         this.ultNotificacao = " vaga Alterada:"+ vaga.toString();
     }
 
-    @Override
-    public Veterinario executarCriacao() {
-        return new Veterinario();
-    }
 }

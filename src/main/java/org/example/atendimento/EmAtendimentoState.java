@@ -10,7 +10,14 @@ public class EmAtendimentoState extends AtendimentoState {
     }
 
     @Override
-    public boolean finalizadoState(Atendimento atendimento) {
+    public String getState() {
+        return "InProgress";
+    }
+
+    @Override
+    public boolean finalizadoState(Atendimento atendimento)
+    {
+        atendimento.setEstado(FinalizarState.getInstance());
         return true;
     }
 }

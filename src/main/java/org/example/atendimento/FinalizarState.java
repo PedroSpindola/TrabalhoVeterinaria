@@ -8,4 +8,9 @@ public class FinalizarState extends AtendimentoState {
     public static FinalizarState getInstance(){
         return getInstance;
     }
+
+    @Override
+    public String getState() {
+        return "Finalized";
+    }
 }

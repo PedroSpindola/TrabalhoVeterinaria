@@ -1,6 +1,9 @@
 package org.example.atendimento;
 
-public abstract class AtendimentoState {
+public abstract class AtendimentoState
+{
+    public abstract String getState();
+
     public boolean agendadoState(Atendimento atendimento){
         return false;
     }

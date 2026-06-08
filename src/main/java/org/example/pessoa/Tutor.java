@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Tutor extends Pessoa implements Observer, IFactory {
+public class Tutor extends Pessoa implements Observer {
 
     private List<Animal> pet = new ArrayList<Animal>();
     private String ultNotificacao;
@@ -27,8 +27,4 @@ public class Tutor extends Pessoa implements Observer, IFactory {
         this.ultNotificacao = " vaga Alterada:"+ vaga.toString();
     }
 
-    @Override
-    public Tutor executarCriacao() {
-        return new Tutor();
-    }
 }
